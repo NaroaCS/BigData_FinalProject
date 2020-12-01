@@ -388,8 +388,8 @@ window.addEventListener('resize', scroller.resize);
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 720 - margin.top - margin.bottom;
+    width = 600 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -420,6 +420,15 @@ svg.append("text")
 var y = d3.scaleLinear()
   .domain([0, 100])
   .range([ height, 0]);
+
+svg.append("text")
+.attr("class", "ylabel")
+.attr("transform", "rotate(-90)")
+.attr("y", 0 - margin.left)
+.attr("x", 0 - (height / 2))
+.attr("dy", "1em")
+.style("text-anchor", "middle")
+.text("Percentage of houshold receiving Snap");
 
 svg.append("g")
   .call(d3.axisLeft(y));
@@ -499,114 +508,123 @@ d3.json("https://chadloh.github.io/data/combined_data.geojson", function(data) {
 
     //Projection
   var albersProjection = d3.geoAlbers()
-                           .scale(100000)
+                           .scale(70000)
                            .rotate([73.9787, 0])
-                           .center([0, 40.7587])
+                           .center([0, 40.68])
                            .translate([width/2, height/2])
   var path = d3.geoPath()
                  .projection(albersProjection)
 
 
-                 d3.json("https://chadloh.github.io/data/home_results.json", function(error, nyc) {
-                   if (error) throw error;
-
-                   svg3.selectAll("path")
-                       .data(nyc.features)
-                       .enter().append("path")
-                       .attr("d", path)
-                       .style("fill", function (d) { return myColor(d.properties.boro_name.replaceAll("\\s", "")); } ) // or d.properties.Perc_white
-                       .attr('stroke','lightgray');
-     });
+d3.json("https://chadloh.github.io/data/home_results.json", function(data) {
+  svg3.selectAll("path")
+     .data(data.features)
+     .enter().append("path")
+     .attr("d", path)
+     .style("fill", function (d) { return myColor(d.properties.boro_name.replaceAll("\\s", "")); } ) // or d.properties.Perc_white
+     .attr('stroke','lightgray');
+});
 
 
-  function updateChart(epl){
-    d3.selectAll("circle")
-      .style("cy", function (d) {
-          if(epl == "Eat")        {return y(d.properties.snap_perc);}
-          else if(epl == "Play")  {return y(d.properties.budsum);}
-          else if(epl == "Learn") {return y(d.properties.PercentageU18WithAccess);}
-    })
+function updateChart(epl){
+
+  svg.selectAll(".bubbles")
     .transition()
-    .duration(1500);
-  }
+    .duration(5000)
+    .attr("cy", function (d) {
+        if(epl == "Eat")        {return y(d.properties.snap_perc);}
+        else if(epl == "Play")  {return y((Math.log(d.properties.budsum+1))*15);}
+        else if(epl == "Learn") {return y(100-d.properties.PercentageU18WithAccess);}})
+;
+
+  d3.select(".ylabel")
+  .text(function (d){
+        if(epl == "Eat")        {return "Percentage of houshold receiving Snap";}
+        else if(epl == "Play")  {return "Open space access index";}
+        else if(epl == "Learn") {return "Youth percentage without Internet access";}
+  });
+}
 
   function updateRace(race){
-        d3.selectAll("circle")
+        svg.selectAll(".bubbles")
+    .transition()
+    .duration(1000)
         .style("opacity",function(d){
           if(race=='White'){
-            if (d.properties.Perc_white=='nan'){fill_color='lightgray'}
+            if (d.properties.Perc_white=='nan'){opacity=0}
             else {opacity= d.properties.Perc_white/100};
             return opacity;
           }
           else if(race=='Black'){
-            if (d.properties.Perc_black_afam=='nan'){fill_color='lightgray'}
+            if (d.properties.Perc_black_afam=='nan'){opacity=0}
             else {opacity= d.properties.Perc_black_afam/99.7};
             return opacity;
           }
           else if(race=='Asian'){
-            if (d.properties.Perc_asian=='nan'){fill_color='lightgray'}
+            if (d.properties.Perc_asian=='nan'){opacity=0}
             else {opacity= d.properties.Perc_asian/85.2};
             return opacity;
           }
           else if(race=='Islander'){
-            if (d.properties.Perc_hawaii_pi=='nan'){fill_color='lightgray'}
+            if (d.properties.Perc_hawaii_pi=='nan'){opacity=0}
             else {opacity= d.properties.Perc_hawaii_pi/6.6};
             return opacity;
           }
           else if(race=='Native'){
-            if (d.properties.Perc_amindian_alnative=='nan'){fill_color='lightgray'}
+            if (d.properties.Perc_amindian_alnative=='nan'){opacity=0}
             else {opacity= d.properties.Perc_amindian_alnative/28};
             return opacity;
           }
           else if(race=='Twoormore'){
-            if (d.properties.Perc_two_or_more=='nan'){fill_color='lightgray'}
+            if (d.properties.Perc_two_or_more=='nan'){opacity=0}
             else {opacity= d.properties.Perc_two_or_more/51.1};
             return opacity;
           }
           else if(race=='Other'){
-            if (d.properties.Perc_other_race=='nan'){fill_color='lightgray'}
+            if (d.properties.Perc_other_race=='nan'){opacity=0}
             else {opacity= d.properties.Perc_other_race/74.5};
             return opacity;
           }
-          else if(race=='reset'){
-            return 0.75;
-          }
+          else if(race=='reset'){return 0.75;}
+          else { return 0.75;}
         })
 
-      d3.selectAll("path")
+      svg3.selectAll("path")
+        .transition()
+        .duration(1000)
       .style("opacity",function(d){
         if(race=='White'){
-          if (d.properties.Perc_white=='nan'){fill_color='lightgray'}
+          if (d.properties.Perc_white=='nan'){opacity=0}
           else {opacity= d.properties.Perc_white/100};
           return opacity;
         }
         else if(race=='Black'){
-          if (d.properties.Perc_black_afam=='nan'){fill_color='lightgray'}
+          if (d.properties.Perc_black_afam=='nan'){opacity=0}
           else {opacity= d.properties.Perc_black_afam/99.7};
           return opacity;
         }
         else if(race=='Asian'){
-          if (d.properties.Perc_asian=='nan'){fill_color='lightgray'}
+          if (d.properties.Perc_asian=='nan'){opacity=0}
           else {opacity= d.properties.Perc_asian/85.2};
           return opacity;
         }
         else if(race=='Islander'){
-          if (d.properties.Perc_hawaii_pi=='nan'){fill_color='lightgray'}
+          if (d.properties.Perc_hawaii_pi=='nan'){opacity=0}
           else {opacity= d.properties.Perc_hawaii_pi/6.6};
           return opacity;
         }
         else if(race=='Native'){
-          if (d.properties.Perc_amindian_alnative=='nan'){fill_color='lightgray'}
+          if (d.properties.Perc_amindian_alnative=='nan'){opacity=0}
           else {opacity= d.properties.Perc_amindian_alnative/28};
           return opacity;
         }
         else if(race=='Twoormore'){
-          if (d.properties.Perc_two_or_more=='nan'){fill_color='lightgray'}
+          if (d.properties.Perc_two_or_more=='nan'){opacity=0}
           else {opacity= d.properties.Perc_two_or_more/51.1};
           return opacity;
         }
         else if(race=='Other'){
-          if (d.properties.Perc_other_race=='nan'){fill_color='lightgray'}
+          if (d.properties.Perc_other_race=='nan'){opacity=0}
           else {opacity= d.properties.Perc_other_race/74.5};
           return opacity;
         }
@@ -645,8 +663,6 @@ d3.json("https://chadloh.github.io/data/combined_data.geojson", function(data) {
         d3.select("#tooltip").classed("hidden", true);
       });
 }
-    // .transition()
-    // .duration(1500);
 
 // The scale you use for bubble size
 var size = d3.scaleSqrt()
@@ -661,7 +677,7 @@ var yCircle = 100
 
 var svg2 = d3.select("#my_dataviz")
   .append("svg")
-    .attr("width", width)
+    .attr("width", width/2)
     .attr("height", height)
 svg2.append("text")
   .attr('x', xCircle)

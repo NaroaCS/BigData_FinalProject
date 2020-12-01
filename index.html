@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Final_NAC</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+
+    <!-- Load color scale -->
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <style>
+        body {
+            margin:0;
+            padding:0;
+            font-family: sans-serif;
+        }
+        a, a:hover, a:visited {
+            color: #0071bc;
+        }
+
+        #map {
+            top:0;
+            height: 100vh;
+            width:100vw;
+            position: fixed;
+            z-index: -5;
+        }
+        #header {
+            margin: 3vh auto;
+            width: 90vw;
+            padding: 2vh;
+            text-align: center;
+        }
+        #footer {
+            width: 100%;
+            min-height: 5vh;
+            padding-top: 2vh;
+            padding-bottom: 2vh;
+            text-align: center;
+            line-height: 25px;
+            font-size: 13px;
+        }
+
+        #features {
+            padding-top: 10vh;
+            padding-bottom: 10vh;
+            z-index: 100;
+        }
+
+        /*style of d3 part*/
+        #my_dataviz {
+            width: 100%;
+            min-height: 5vh;
+            padding-top: 2vh;
+            padding-bottom: 2vh;
+            text-align: center;
+            line-height: 25px;
+            font-size: 13px;
+            background-color: white;
+        }
+        #buttons1 {
+            width: 100%;
+            min-height: 5vh;
+            padding-top: 2vh;
+            padding-bottom: 2vh;
+            text-align: center;
+            line-height: 25px;
+            font-size: 13px;
+            background-color: white;
+        }
+        #buttons2 {
+            width: 100%;
+            min-height: 5vh;
+            padding-top: 2vh;
+            padding-bottom: 2vh;
+            text-align: center;
+            line-height: 25px;
+            font-size: 13px;
+            background-color: white;
+        }
+
+        .path {
+
+          stroke: #fff;
+          stroke-width: .5;
+          stroke-dasharray: 1;
+          fill: #afafaf;
+
+        }
+        #tooltip.hidden{
+          display: none;
+        }
+
+        #tooltip {
+          position: absolute;
+          text-align: center;
+          padding: 2px;
+          font: 12px sans-serif;
+          background: #fff;
+          border: 0px;
+          border-radius: 8px;
+          pointer-events: none;
+          opacity: 0.6;
+        }
+        /* END of style of d3 part*/
+
+
+        .centered {
+            width: 50vw;
+            margin: 0 auto;
+        }
+        .lefty {
+            width: 33vw;
+            margin-left: 5vw;
+        }
+        .righty {
+            width: 33vw;
+            margin-left: 62vw;
+        }
+        .light {
+            color: #444;
+            background-color: #fafafa;
+        }
+        .dark {
+            color: #fafafa;
+            background-color: #444;
+        }
+        .step {
+            padding-bottom: 50vh;
+            /* margin-bottom: 10vh; */
+            opacity: 0.25;
+        }
+        .step.active {
+            opacity: 0.9;
+        }
+
+        .step div {
+            padding:  25px 50px;
+            line-height: 25px;
+            font-size: 13px;
+        }
+
+        .step img {
+            width: 100%;
+        }
+
+        @media (max-width: 750px) {
+            #features {
+                width: 90vw;
+                margin: 0 auto;
+            }
+        }
+
+        /* Fix issue on mobile browser where scroll breaks  */
+        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan,
+        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas {
+            touch-action: unset;
+        }
+
+
+        /* Style for D3 part */
+        .bubbles {
+          stroke-width: 2px;
+          stroke: white;
+        }
+        .bubbles:hover {
+          stroke: black;
+        }
+        .text-anchor {
+          font-family : Arial;
+          font-size: 8px;
+        }
+
+        </style>
+</head>
+<body>
+
+<div id="map"></div>
+<div id="story"></div>
+
+
+<!-- Divs for D3 interactive part  -->
+<div id='tooltip' class="hidden"> </div>
+<div id='buttons1'>
+  <p><b> Eat, Play, and Learn </b></p>
+  <button id="Eat">Eat</button>
+  <button id="Play">Play</button>
+  <button id="Learn">Learn</button>
+</div>
+<div id='buttons2'>
+  <p><b> Race </b></p>
+  <button id="White">White</button>
+  <button id="Black">Black</button>
+  <button id="Asian">Asian</button>
+  <button id="Other">Other</button>
+  <button id="Twoormore">Two or more</button>
+  <button id="Native">Native</button>
+  <button id="Islander">Islander</button>
+  <button id="Reset">Reset</button>
+
+</div>
+<div id="my_dataviz"></div>
+
+
+
+<script src="./config.js"></script>
+<script>
+var layerTypes = {
+    'fill': ['fill-opacity'],
+    'line': ['line-opacity'],
+    'circle': ['circle-opacity', 'circle-stroke-opacity'],
+    'symbol': ['icon-opacity', 'text-opacity'],
+    'raster': ['raster-opacity'],
+    'fill-extrusion': ['fill-extrusion-opacity']
+}
+
+var alignments = {
+    'left': 'lefty',
+    'center': 'centered',
+    'right': 'righty'
+}
+
+function getLayerPaintType(layer) {
+    var layerType = map.getLayer(layer).type;
+    return layerTypes[layerType];
+}
+
+function setLayerOpacity(layer) {
+    var paintProps = getLayerPaintType(layer.layer);
+    paintProps.forEach(function(prop) {
+        map.setPaintProperty(layer.layer, prop, layer.opacity);　　
+    });
+}
+
+var story = document.getElementById('story');
+var features = document.createElement('div');
+features.classList.add(alignments[config.alignment]);
+features.setAttribute('id', 'features');
+
+var header = document.createElement('div');
+
+if (config.title) {
+    var titleText = document.createElement('h1');
+    titleText.innerText = config.title;
+    header.appendChild(titleText);
+}
+
+if (config.subtitle) {
+    var subtitleText = document.createElement('h2');
+    subtitleText.innerText = config.subtitle;
+    header.appendChild(subtitleText);
+}
+
+if (config.byline) {
+    var bylineText = document.createElement('p');
+    bylineText.innerText = config.byline;
+    header.appendChild(bylineText);
+}
+
+if (header.innerText.length > 0) {
+    header.classList.add(config.theme);
+    header.setAttribute('id', 'header');
+    story.appendChild(header);
+}
+
+config.chapters.forEach((record, idx) => {
+    var container = document.createElement('div');
+    var chapter = document.createElement('div');
+
+    if (record.title) {
+        var title = document.createElement('h3');
+        title.innerText = record.title;
+        chapter.appendChild(title);
+    }
+
+    if (record.image) {
+        var image = new Image();
+        image.src = record.image;
+        chapter.appendChild(image);
+    }
+
+    if (record.description) {
+        var story = document.createElement('p');
+        story.innerHTML = record.description;
+        chapter.appendChild(story);
+    }
+
+    container.setAttribute('id', record.id);
+    container.classList.add('step');
+    if (idx === 0) {
+        container.classList.add('active');
+    }
+
+    chapter.classList.add(config.theme);
+    container.appendChild(chapter);
+    features.appendChild(container);
+});
+
+
+story.appendChild(features);
+
+var footer = document.createElement('div');
+
+if (config.footer) {
+    var footerText = document.createElement('p');
+    footerText.innerHTML = config.footer;
+    footer.appendChild(footerText);
+}
+
+if (footer.innerText.length > 0) {
+    footer.classList.add(config.theme);
+    footer.setAttribute('id', 'footer');
+    story.appendChild(footer);
+}
+
+mapboxgl.accessToken = config.accessToken;
+
+const transformRequest = (url) => {
+    const hasQuery = url.indexOf("?") !== -1;
+    const suffix = hasQuery ? "&pluginName=journalismScrollytelling" : "?pluginName=journalismScrollytelling";
+    return {
+      url: url + suffix
+    }
+}
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: config.style,
+    center: config.chapters[0].location.center,
+    zoom: config.chapters[0].location.zoom,
+    bearing: config.chapters[0].location.bearing,
+    pitch: config.chapters[0].location.pitch,
+    scrollZoom: false,
+    transformRequest: transformRequest
+});
+
+var marker = new mapboxgl.Marker();
+if (config.showMarkers) {
+    marker.setLngLat(config.chapters[0].location.center).addTo(map);
+}
+
+// instantiate the scrollama
+var scroller = scrollama();
+
+map.on("load", function() {
+    // setup the instance, pass callback functions
+    scroller
+    .setup({
+        step: '.step',
+        offset: 0.5,
+        progress: true
+    })
+    .onStepEnter(response => {
+        var chapter = config.chapters.find(chap => chap.id === response.element.id);
+        response.element.classList.add('active');
+        map.flyTo(chapter.location);
+        if (config.showMarkers) {
+            marker.setLngLat(chapter.location.center);
+        }
+        if (chapter.onChapterEnter.length > 0) {
+            chapter.onChapterEnter.forEach(setLayerOpacity);
+        }
+    })
+    .onStepExit(response => {
+        var chapter = config.chapters.find(chap => chap.id === response.element.id);
+        response.element.classList.remove('active');
+        if (chapter.onChapterExit.length > 0) {
+            chapter.onChapterExit.forEach(setLayerOpacity);
+        }
+    });
+});
+
+
+// setup resize event
+window.addEventListener('resize', scroller.resize);
+
+</script>
+
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 20, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 720 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+var x = d3.scaleLinear()
+  .domain([0, 1])
+  .range([ 0, width ]);
+
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x));
+
+svg.append("text")
+    .attr("transform",
+          "translate(" + (width/2) + " ," +
+                         (height + margin.top + 20) + ")")
+    .style("text-anchor", "middle")
+    .text("Social Vulnerability Index");
+
+// Add Y axis
+var y = d3.scaleLinear()
+  .domain([0, 100])
+  .range([ height, 0]);
+
+svg.append("g")
+  .call(d3.axisLeft(y));
+var allgroups = ["Manhattan", "Bronx", "Brooklyn", "Queens", "Staten Island"]
+
+var myColor = d3.scaleOrdinal()
+  .domain(allgroups)
+  .range(d3.schemeSet2);
+
+// Add a scale for bubble size
+var z = d3.scaleLinear()
+  .domain([0, 5000])
+  .range([ 4, 40]);
+//Read the data
+d3.json("https://chadloh.github.io/data/combined_data.geojson", function(data) {
+  console.log(data)
+
+  // Add X axis
+
+  // Add a scale for bubble color
+
+
+  // -1- Create a tooltip div that is hidden by default:
+  var tooltip = d3.select("#my_dataviz")
+    .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "black")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("color", "white")
+
+  // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+  var showTooltip = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+    tooltip
+      .style("opacity", 1)
+      .html("Neighborhood Name: " + d.properties.ntaname + "<br> Borough: "+d.properties.boro_name)
+      .style("left", (d3.mouse(this)[0]+30) + "px")
+      .style("top", (d3.mouse(this)[1]+30) + "px")
+  }
+  var moveTooltip = function(d) {
+    tooltip
+      .style("left", (d3.mouse(this)[0]+30) + "px")
+      .style("top", (d3.mouse(this)[1]+30) + "px")
+  }
+  var hideTooltip = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+  }
+  svg.append('g')
+    .selectAll("dot")
+    .data(data.features)
+    .enter()
+    .append("circle")
+    .attr("class", function(d) { return "bubbles " + d.properties.boro_name.replace(" ", "_")})
+    .attr("cx", function (d) { return x(d.properties.Total_x); } )
+    .attr("cy", function (d) { return y(d.properties.snap_perc); } )
+    .attr("r", function (d) { return z(d.properties.Total_y*d.properties.PercU18/100); } )
+    .style("fill", function (d) { return myColor(d.properties.boro_name.replaceAll("\\s", "")); } )
+    .style("opacity", 0.75)
+    // -3- Trigger the functions
+    .on("mouseover", showTooltip )
+    .on("mousemove", moveTooltip )
+    .on("mouseleave", hideTooltip )
+  });
+
+
+  var svg3 = d3.select("#my_dataviz")
+    .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    //Projection
+  var albersProjection = d3.geoAlbers()
+                           .scale(100000)
+                           .rotate([73.9787, 0])
+                           .center([0, 40.7587])
+                           .translate([width/2, height/2])
+  var path = d3.geoPath()
+                 .projection(albersProjection)
+
+
+                 d3.json("https://chadloh.github.io/data/home_results.json", function(error, nyc) {
+                   if (error) throw error;
+
+                   svg3.selectAll("path")
+                       .data(nyc.features)
+                       .enter().append("path")
+                       .attr("d", path)
+                       .style("fill", function (d) { return myColor(d.properties.boro_name.replaceAll("\\s", "")); } ) // or d.properties.Perc_white
+                       .attr('stroke','lightgray');
+     });
+
+
+  function updateChart(epl){
+    d3.selectAll("circle")
+      .style("cy", function (d) {
+          if(epl == "Eat")        {return y(d.properties.snap_perc);}
+          else if(epl == "Play")  {return y(d.properties.budsum);}
+          else if(epl == "Learn") {return y(d.properties.PercentageU18WithAccess);}
+    })
+    .transition()
+    .duration(1500);
+  }
+
+  function updateRace(race){
+        d3.selectAll("circle")
+        .style("opacity",function(d){
+          if(race=='White'){
+            if (d.properties.Perc_white=='nan'){fill_color='lightgray'}
+            else {opacity= d.properties.Perc_white/100};
+            return opacity;
+          }
+          else if(race=='Black'){
+            if (d.properties.Perc_black_afam=='nan'){fill_color='lightgray'}
+            else {opacity= d.properties.Perc_black_afam/99.7};
+            return opacity;
+          }
+          else if(race=='Asian'){
+            if (d.properties.Perc_asian=='nan'){fill_color='lightgray'}
+            else {opacity= d.properties.Perc_asian/85.2};
+            return opacity;
+          }
+          else if(race=='Islander'){
+            if (d.properties.Perc_hawaii_pi=='nan'){fill_color='lightgray'}
+            else {opacity= d.properties.Perc_hawaii_pi/6.6};
+            return opacity;
+          }
+          else if(race=='Native'){
+            if (d.properties.Perc_amindian_alnative=='nan'){fill_color='lightgray'}
+            else {opacity= d.properties.Perc_amindian_alnative/28};
+            return opacity;
+          }
+          else if(race=='Twoormore'){
+            if (d.properties.Perc_two_or_more=='nan'){fill_color='lightgray'}
+            else {opacity= d.properties.Perc_two_or_more/51.1};
+            return opacity;
+          }
+          else if(race=='Other'){
+            if (d.properties.Perc_other_race=='nan'){fill_color='lightgray'}
+            else {opacity= d.properties.Perc_other_race/74.5};
+            return opacity;
+          }
+          else if(race=='reset'){
+            return 0.75;
+          }
+        })
+
+      d3.selectAll("path")
+      .style("opacity",function(d){
+        if(race=='White'){
+          if (d.properties.Perc_white=='nan'){fill_color='lightgray'}
+          else {opacity= d.properties.Perc_white/100};
+          return opacity;
+        }
+        else if(race=='Black'){
+          if (d.properties.Perc_black_afam=='nan'){fill_color='lightgray'}
+          else {opacity= d.properties.Perc_black_afam/99.7};
+          return opacity;
+        }
+        else if(race=='Asian'){
+          if (d.properties.Perc_asian=='nan'){fill_color='lightgray'}
+          else {opacity= d.properties.Perc_asian/85.2};
+          return opacity;
+        }
+        else if(race=='Islander'){
+          if (d.properties.Perc_hawaii_pi=='nan'){fill_color='lightgray'}
+          else {opacity= d.properties.Perc_hawaii_pi/6.6};
+          return opacity;
+        }
+        else if(race=='Native'){
+          if (d.properties.Perc_amindian_alnative=='nan'){fill_color='lightgray'}
+          else {opacity= d.properties.Perc_amindian_alnative/28};
+          return opacity;
+        }
+        else if(race=='Twoormore'){
+          if (d.properties.Perc_two_or_more=='nan'){fill_color='lightgray'}
+          else {opacity= d.properties.Perc_two_or_more/51.1};
+          return opacity;
+        }
+        else if(race=='Other'){
+          if (d.properties.Perc_other_race=='nan'){fill_color='lightgray'}
+          else {opacity= d.properties.Perc_other_race/74.5};
+          return opacity;
+        }
+        else if(race=='reset'){
+          return 0.75;
+        }
+      })
+      .on("mouseenter", function(d) {
+            console.log(d);
+            d3.select(this)
+            .style("stroke-width", 1.5)
+            .style("stroke-dasharray", 0)
+
+            d3.select("#tooltip")
+            .transition()
+            .style("opacity", 1)
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY) + "px")
+            .text(function(){
+              if (race=='White'){return(d.properties.Perc_white)}
+              else if (race=='Black'){return(d.properties.Perc_black_afam)}
+              else if (race=='Asian'){return(d.properties.Perc_asian)}
+              else if (race=='Islander'){return(d.properties.Perc_hawaii_pi)}
+              else if (race=='Native'){return(d.properties.Perc_amindian_alnative)}
+              else if (race=='Other'){return( d.properties.Perc_other_race)}
+              else if (race=='Twoormore'){return( d.properties.Perc_two_or_more)};}
+            )
+
+            d3.select("#tooltip").classed("hidden", false);
+
+      })
+      .on("mouseleave", function(d) {
+        d3.select(this)
+            .style("stroke-width", .25)
+            .style("stroke-dasharray", 1)
+        d3.select("#tooltip").classed("hidden", true);
+      });
+}
+    // .transition()
+    // .duration(1500);
+
+// The scale you use for bubble size
+var size = d3.scaleSqrt()
+  .domain([0, 5000])  // What's in the data, let's say it is percentage
+  .range([4, 40])  // Size in pixel
+
+// Add legend: circles
+var valuesToShow = [100, 1000, 5000]
+var xCircle = 130
+var xLabel = 200
+var yCircle = 100
+
+var svg2 = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+svg2.append("text")
+  .attr('x', xCircle)
+  .attr('y', 14)
+  .text("Number of Youth in each census tract")
+  .attr('font-size', '12px')
+  .attr('text-anchor', 'middle')
+
+svg2.selectAll("legend")
+  .data(valuesToShow)
+  .enter()
+  .append("circle")
+    .attr("cx", xCircle)
+    .attr("cy", function(d){ return yCircle - size(d) } )
+    .attr("r", function(d){ return size(d) })
+    .style("fill", "none")
+    .attr("stroke", "black")
+
+// Add legend: segments
+svg2.selectAll("legend")
+  .data(valuesToShow)
+  .enter()
+  .append("line")
+    .attr('x1', function(d){ return xCircle + size(d) } )
+    .attr('x2', xLabel)
+    .attr('y1', function(d){ return yCircle - size(d) } )
+    .attr('y2', function(d){ return yCircle - size(d) } )
+    .attr('stroke', 'black')
+    .style('stroke-dasharray', ('2,2'))
+
+// Add legend: labels
+svg2.selectAll("legend")
+  .data(valuesToShow)
+  .enter()
+  .append("text")
+    .attr('x', xLabel)
+    .attr('y', function(d){ return yCircle - size(d) } )
+    .text( function(d){ return d } )
+    .style("font-size", 10)
+    .attr('alignment-baseline', 'middle')
+
+    // What to do when one group is hovered
+    var highlight = function(d){
+      // reduce opacity of all groups
+      d3.selectAll(".bubbles").style("opacity", .05)
+      // expect the one that is hovered
+      d3.selectAll("."+d.replace(" ", "_")).style("opacity", 0.75)
+    }
+
+    // And when it is not hovered anymore
+    var noHighlight = function(d){
+      d3.selectAll(".bubbles").style("opacity", 0.75)
+    }
+//Add borough colors
+
+// Add one dot in the legend for each name.
+var size = 20
+svg2.selectAll("myrect")
+  .data(allgroups)
+  .enter()
+  .append("circle")
+    .attr("cx", xCircle-50)
+    .attr("cy", function(d,i){ return yCircle +50 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("r", 7)
+    .style("fill", function(d){ return myColor(d)})
+    .on("mouseover", highlight)
+    .on("mouseleave", noHighlight);
+
+// Add labels beside legend dots
+svg2.selectAll("mylabels")
+  .data(allgroups)
+  .enter()
+  .append("text")
+    .attr("x", xCircle-50 + size*.8)
+    .attr("y", function(d,i){ return yCircle+50 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+    .style("fill", function(d){ return myColor(d)})
+    .text(function(d){ return d})
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+    .on("mouseover", highlight)
+    .on("mouseleave", noHighlight);
+
+  // Add dots
+
+  d3.select("#Eat").on("click", function() {
+    console.log("Eat")
+    updateChart("Eat");
+  });
+  d3.select("#Play").on("click", function() {
+    console.log("Play")
+    updateChart("Play");
+  });
+  d3.select("#Learn").on("click", function() {
+    console.log("Learn")
+    updateChart("Learn");
+  });
+
+  d3.select("#White").on("click", function() {
+    updateRace('White');
+  });
+  d3.select("#Black").on("click", function() {
+    updateRace('Black');
+  });
+  d3.select("#Asian").on("click", function() {
+    updateRace('Asian');
+  });
+  d3.select("#Islander").on("click", function() {
+    updateRace('Islander');
+  });
+  d3.select("#Native").on("click", function(){
+    updateRace('Native');
+  })
+  d3.select("#Twoormore").on("click", function(){
+    updateRace('Twoormore');
+  })
+  d3.select("#Other").on("click", function(){
+    updateRace('Other');
+  })
+  d3.select("#Reset").on("click", function(){
+    updateRace('Reset');
+  })
+</script>
+
+</body>
+</html>

@@ -7,7 +7,6 @@ var config = {
     title: 'The COVID Pandemic through the Lens of Vulnerable Youth',
     subtitle: 'How much has NYC been prepared for this unprecedented situation?',
     byline: 'Final Project for 11.154/11.454 Big Data, Visualization, and Society / By Naroa Coretti Sanchez, Ayaka Yamashita, Hyun-Chae Chad Loh',
-    footer: 'Source: NYC OpenData, CDC/ATSDR, US Census',
     chapters: [
         {
             id: 'preview',
@@ -253,7 +252,7 @@ var config = {
                  }
             ]
         },
-        
+
         {
             id: 'transition',
             title: 'Comparison',

@@ -178,16 +178,6 @@
           font-size: 8px;
         }
 
-
-
-
-
-
-
-
-
-/* COPY THIS PART  */
-
         button {
         display: inline-block;
         height: 80px;
@@ -224,7 +214,18 @@
           line-height: 25px;
           font-size: 16px;
           background-color: white;
-          /*border: 10vh solid #fff;*/
+        }
+        #footer{
+          width: 100%-10vh;
+          min-height: 5vh;
+          padding-top: 5vh;
+          padding-bottom: 5vh;
+          padding-right: : 5vh;
+          padding-left: 5vh;
+          text-align: left;
+          line-height: 25px;
+          font-size: 16px;
+          background-color: white;
         }
 
         </style>
@@ -234,17 +235,16 @@
     <div id="map"></div>
     <div id="story"></div>
 
+    <!-- Divs for D3 interactive part  -->
+
     <div id="intro">
-      <p><b>Do you want to learn more about this?</b></p>
-      <p>Explore the bubble chart and map below. By clicking on the Eat, Learn, Play icons you will be able to select the data in the bubble chart. You can also select the different races and the saturation of the color will change according to the percentage of that race in each census tract.</p>
+      <p><b>Want to learn more? Explore the bubble chart and map below.</b></p>
+      <p>By clicking on the Eat, Learn, Play icons you will be able to select the data in the bubble chart. You can also select the different races and the saturation of the color will change according to the percentage of that race in each census tract.</p>
       <p>If you hover over the bubbles or map will show information about those census tracts. In addition, the neihborhood that you are selecting will be highlighted and it will also allow you to explore disparities within the neighborhoods.</p>
       <p>Finally, you can if you want to see just the data for one borough you can hover over the names of each borough in the legend.</p>
     </div>
 
 
-
-
-    <!-- Divs for D3 interactive part  -->
     <div class = "row">
       <div class="column_left">
         <p><b> Show results</b></p>
@@ -266,9 +266,14 @@
       <div id = "tt" class="column_right">
       </div>
     </div>
+
+
     <div id="my_dataviz"></div>
 
 
+    <div id="footer">
+      <p>Learn more about the data sources and methods <b> <a href="about.html">here </a> </b></p>
+    </div>
 
 
 
@@ -623,6 +628,7 @@
               else if(race=='Islander'){
                 if (d.properties.Perc_hawaii_pi=='nan'){opacity=0}
                 else {opacity= d.properties.Perc_hawaii_pi/6.6};
+                //these divisions (such as 6.6 here)  are the maximum in the data and is used to normalize it, otherwise for some races it would all be white
                 return opacity;
               }
               else if(race=='Native'){
@@ -708,7 +714,7 @@
     svg2.append("text")
       .attr('x', xCircle)
       .attr('y', 14)
-      .text("Number of Youth in each census tract")
+      .text("Number of youth in each census tract")
       .attr('font-size', '12px')
       .attr('text-anchor', 'middle')
 

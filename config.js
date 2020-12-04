@@ -1,18 +1,19 @@
 var config = {
-    style: 'mapbox://styles/ayamashita24/cki4qqws400n719qv85jx5yhi',
-    accessToken: 'pk.eyJ1IjoiYXlhbWFzaGl0YTI0IiwiYSI6ImNraTNucjd5bTF2bGEzM28yOW8wN2hlcnIifQ.zkkuVYV-XG6cudnqNKC_og',
+    style: 'mapbox://styles/ayamashita24/cki9g6s3y4i1319rwxek2kyoq',
+    accessToken: 'pk.eyJ1IjoiYXlhbWFzaGl0YTI0IiwiYSI6ImNraTlvd3N1NTBhNHMydW14c3V2Y242NGkifQ.Ej7QL5RXwMlo9fAAtqwZUg',
     showMarkers: false,
     theme: 'light',
     alignment: 'left',
-    title: 'The COVID Pandemic through the Lens of Vulnerable Youth',
-    subtitle: 'How much has NYC been prepared for this unprecedented situation?',
+    title: 'The COVID Pandemic through the Lens of Vulnerable Youth in NYC',
+    subtitle: 'Was NYC prepared for this unprecedented social disaster?',
     byline: 'Final Project for 11.154/11.454 Big Data, Visualization, and Society / By Naroa Coretti Sanchez, Ayaka Yamashita, Hyun-Chae Chad Loh',
+    //footer: '',
     chapters: [
         {
             id: 'preview',
-            title: 'Youth Situation in NYC during Covid-19',
+            title: 'Elements of Youth Wellness; EAT, PLAY, and LEARN',
               //image: './path/to/image/source.png',
-            description: 'Eat, play, and learn are the most important elements of youth wellness. However, when the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playground, and in-person classes. First, our project shows how much NYC has been prepared for this unprecedented situation by analyzing access to food, open spaces, and the internet. Then, we further observe how races and social vulnerability relate to access to those essentials.',
+            description: 'When the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playgrounds, and in-person classes. By analyzing census data, we are able to display where the city may need to focus in the future.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 10.50,
@@ -59,8 +60,8 @@ var config = {
         },
         {
             id: 'food_access',
-            title: 'Access to Food',
-            description: 'Food Insecurity is the lack of access, at times, to enough nutritionally adequate food for an active, healthy life for all members of a household. To solve this issue, NYC has worked to make it easier to access benefits programs by investing in SNAP outreach, language access services, and mobile platforms that streamline processes.  (Food Policy Report, 2019). Visualizing SNAP (food stamp) benefits (% households, 2018) gives us a sense of how much NYC city was prepared for food insecurity and how worse it could have been if there were not exiting the SNAP program. ',
+            title: 'How about Food Access?',
+            description: 'The stronger yellow means less access to food. Which part of the city suffers more from food insecurity?',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,
@@ -103,13 +104,111 @@ var config = {
                      layer: 'svi',
                      opacity: 0
                  }
+            ]
+        },
+        {
+            id: 'upper_east_side',
+            title: 'Upper East Side?',
+            //image: './path/to/image/source.png',
+            description: 'No, one of the most richest neightborhood in NYC.' ,
+            location: {
+              center: { lon: -73.956555, lat: 40.773565 },
+              zoom: 12.7,
+              pitch: 53.00,
+              bearing: 28.00
+            },
+            onChapterEnter: [
+                         {
+                             layer: 'eat',
+                             opacity: 1
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+                    ],
+                    onChapterExit: [
+
+                       {
+                             layer: 'eat',
+                             opacity: 0.4
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+            ]
+        },
+        {
+            id: 'brownsville',
+            title: 'What about Brownsville?',
+            //image: './path/to/image/source.png',
+            description: 'Can neighborhood with relatively high food insecurity even before COVID-19 bear with the situation that children cannot eat at school?',
+            location: {
+              center: { lon:  -73.9065, lat: 40.6564 },
+              zoom: 12.7,
+              pitch: 53.00,
+              bearing: 8.00
+            },
+            onChapterEnter: [
+                         {
+                             layer: 'eat',
+                             opacity: 1
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+                    ],
+                    onChapterExit: [
+
+                       {
+                             layer: 'eat',
+                             opacity: 0.4
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
             ]
         },
         {
             id: 'openspace_access',
-            title: 'Access to Open Space ',
+            title: 'The 2nd element: Access to Playground',
             //image: './path/to/image/source.png',
-            description: 'We calculated access to open spaces using NYC’s park property data. However, not all parks listed in the dataset were the same – some were well-managed parks while some were just lots with a patch of green – and therefore, we deleted properties that were not suitable for youth’s recreational use. In addition, we used the park maintenance budget data(2019) and population data to calculate how much of the city budget is being used for each youth. ',
+            description: 'Covid-19 deprived access to school playgrounds from youth and well-maintained parks became alternatives. The place with stronger green requires more budget and care.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,
@@ -123,7 +222,7 @@ var config = {
                  },
                  {
                      layer: 'play',
-                     opacity: 1
+                     opacity: 0.75
                  },
                 {
                      layer: 'learn',
@@ -155,10 +254,108 @@ var config = {
             ]
         },
         {
-            id: 'internet_access',
-            title: 'Access to the Internet',
+            id: 'upper_east_side2',
+            title: 'Upper East Side',
             //image: './path/to/image/source.png',
-            description: 'Covid-19 has changed drastically youth education from in-person to online. To understand how much NYC has been prepared for this shift, we analyze the data of internet access for under 18 years old (2018). ',
+            description: 'Upper east side has well-maintained parks where youth can play.' ,
+            location: {
+              center: { lon: -73.956555, lat: 40.773565 },
+              zoom: 12.7,
+              pitch: 53.00,
+              bearing: 28.00
+            },
+            onChapterEnter: [
+                         {
+                             layer: 'eat',
+                             opacity: 0
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0.75
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+                    ],
+                    onChapterExit: [
+
+                       {
+                             layer: 'eat',
+                             opacity: 0
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0.4
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0.4
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+            ]
+        },
+        {
+            id: 'brownsville2',
+            title: 'Brownsville',
+            //image: './path/to/image/source.png',
+            description: 'Parks at Brownsville needs to be more maintained.' ,
+            location: {
+              center: { lon:  -73.9065, lat: 40.6564 },
+              zoom: 12.7,
+              pitch: 53.00,
+              bearing: 8.00
+            },
+            onChapterEnter: [
+                         {
+                             layer: 'eat',
+                             opacity: 0
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0.75
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+                    ],
+                    onChapterExit: [
+
+                       {
+                             layer: 'eat',
+                             opacity: 0
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0.4
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+            ]
+        },
+        {
+            id: 'internet_access',
+            title: 'The 3rd element: Access to the Internet',
+            //image: './path/to/image/source.png',
+            description: 'Internet became essential infrastructure for Online education during the pandemic. Was the City prepared enough for it?',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,
@@ -203,11 +400,110 @@ var config = {
                  }
             ]
         },
+
+        {
+            id: 'upper_east_side3',
+            title: 'Upper East Side',
+            //image: './path/to/image/source.png',
+            description: 'No color means no problem. It seems that Upper East Side has no problem in internet access.' ,
+            location: {
+              center: { lon: -73.956555, lat: 40.773565 },
+              zoom: 12.7,
+              pitch: 53.00,
+              bearing: 28.00
+            },
+            onChapterEnter: [
+                         {
+                             layer: 'eat',
+                             opacity: 0
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0.58
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+                    ],
+                    onChapterExit: [
+
+                       {
+                             layer: 'eat',
+                             opacity: 0
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0.4
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+            ]
+        },
+        {
+            id: 'brownsville3',
+            title: 'Brownsville',
+            //image: './path/to/image/source.png',
+            description: 'Internet at Brownsbille needs to be developed more.' ,
+            location: {
+              center: { lon:  -73.9065, lat: 40.6564 },
+              zoom: 12.7,
+              pitch: 53.00,
+              bearing: 8.00
+            },
+            onChapterEnter: [
+                         {
+                             layer: 'eat',
+                             opacity: 0
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0.58
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+                    ],
+                    onChapterExit: [
+
+                       {
+                             layer: 'eat',
+                             opacity: 0
+                         },
+                         {
+                             layer: 'play',
+                             opacity: 0
+                         },
+                        {
+                             layer: 'learn',
+                             opacity: 0.4
+                         },
+                        {
+                             layer: 'svi',
+                             opacity: 0
+                         }
+            ]
+        },
         {
             id: 'svi',
-            title: 'Social Vulnerability Index',
+            title: 'How does Social Vulnerability relate to 3 elements of Youth Wellness?',
             //image: './path/to/image/source.png',
-            description: 'We use CDC SVI, which uses 15 U.S. census variables to help local officials identify communities that may need support before, during, or after disasters. In our case, it will help us to identify youth who have been vulnerable. ',
+            description: 'The map shows the place with high social vulnerability with stronger color.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,
@@ -253,54 +549,5 @@ var config = {
             ]
         },
 
-        {
-            id: 'transition',
-            title: 'Comparison',
-            //image: './path/to/image/source.png',
-            description: 'By comparing food, open space, internet access with SVI, and race information, we can identify which areas and how many youth populations might be at risk during Covid-19 time. ',
-            location: {
-              center: { lon: -74.09232, lat: 40.73593 },
-              zoom: 10.50,
-              pitch: 0.00,
-              bearing: 0.00
-            },
-    onChapterEnter: [
-                 {
-                     layer: 'eat',
-                     opacity: 0
-                 },
-                 {
-                     layer: 'play',
-                     opacity: 0
-                 },
-                {
-                     layer: 'learn',
-                     opacity: 0
-                 },
-                {
-                     layer: 'svi',
-                     opacity: 0
-                 }
-            ],
-            onChapterExit: [
-
-               {
-                     layer: 'eat',
-                     opacity: 0
-                 },
-                 {
-                     layer: 'play',
-                     opacity: 0
-                 },
-                {
-                     layer: 'learn',
-                     opacity: 0
-                 },
-                {
-                     layer: 'svi',
-                     opacity: 0
-                 }
-            ]
-        },
     ]
 };

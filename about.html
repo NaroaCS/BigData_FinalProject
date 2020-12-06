@@ -40,14 +40,17 @@
   <p><b>Data sources and methods</b></p>
   <div style="text-indent:20px">
   <dl>
+    <dt><b><span style="font-size:14px;">Social Vulnerability Index</span></b></dt>
+    <dd>For this project we used the Social Vulnerability Index (SVI) from <a href="https://www.atsdr.cdc.gov/placeandhealth/svi/index.html">CDC</a>, which uses 15 variables from the U.S. Census to help local officials identify communities that may need support before, during, or after disasters. It takes into account factors related to socioeconomic status, household composition and disability, minority status and language, and housing type and transportation. In our case, this index helps us to identify those who where already vulnerable that might have become even more so as a consequence of the Covid-19 pandemic. The 2018 CDC SVI takes data primarily from the 2014-2018 American Community Survey (ACS) 5-year estimates and is available at a census tract level.</dd>
+    <dt><b><span style="font-size:14px;">Demographics</span></b></dt>
+    <dd>The demographic information has been extracted from the U.S. Census Bureau 2014-2018 ACS 5-year estimates <a href="https://data.census.gov/cedsci/table?q=ACS%205%20year&tid=ACSDP5Y2018.DP05&hidePreview=true">Table DP05</a> in order to have data at a census tract level. The race data from the U.S. Census is divided in two main categories: people from one race and two or more races. Then, within people from one race, the main categories are: White, Black or African American, American Indian and Alaska Native, Asian, Native Hawaiian and Other Pacific Islander and Some other race. These categories are renamed as White, Black, Native, Asian, Islander, and Other for text legibility. </dd>
    <dt><b><span style="font-size:14px;">Access to Food</span></b></dt>
-   <dd>SNAP benefits (% households, US Census 2018) is an indicator of food insecurity. Not eating at school due to Covid-19 put more risk on the population that had problems securing food even before Covid-19.</dd>
+   <dd>The vulnerability related to food access is represened by the SNAP benefits(% households, US Census 2018), as it is an indicator of food insecurity. Not eating at school due to Covid-19 put more risk on the population that already had problems securing food even before Covid-19.</dd>
    <dt><b><span style="font-size:14px;">Access to Playgrounds</span></b></dt>
    <dd>Using NYC’s park property data, park maintenance budget data, and population data (2019), we visualized how much city budget was allotted for each open space in NYC. Covid-19 deprived access to school playgrounds from youth, and well-maintained parks became alternatives. (Note: In order only to include quality open space sufficient for supporting youth recreation, we removed not-in-quality lots with just a patch of green.)</dd>
    <dt><b><span style="font-size:14px;">Access to the Internet</span></b></dt>
-   <dd>Covid-19 has changed youth education drastically from in-person to online. To understand how much NYC was prepared for this shift, we analyzed internet access data for under 18 years old (US Census, 2018).</dd>
-   <dt><b><span style="font-size:14px;">Social Vulnerability Index</span></b></dt>
-   <dd>We use CDC SVI, which uses 15 U.S. census variables to help local officials identify communities that may need support before, during, or after disasters (CDC/ATSDR 2018). In our case, it will help us to identify youth who have been vulnerable.</dd>
+   <dd> The Covid-19 has changed the importance of having proper internet access. Right now, not having access to internet means not having access to education. To understand how much NYC was prepared for this shift, we included U.S. Census data on internet access that shows the number of under 18 youth who have access to both a computer and internet. The data has been extracted from the U.S. Census Bureau 2014-2018 ACS 5-year estimates <a href="https://data.census.gov/cedsci/table?q=b28005&g=0100000US&tid=ACSDT5Y2018.B28005&hidePreview=true">Table B28005</a> and the resolution of the data was also the census tracts. </dd>
+
   </dl>
   </div>
 

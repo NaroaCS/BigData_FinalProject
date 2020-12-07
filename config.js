@@ -61,7 +61,7 @@ var config = {
         {
             id: 'food_access',
             title: 'How about Food Access?',
-            description: 'The stronger yellow means less access to food. Which part of the city suffers more from food insecurity?',
+            description: 'Less yellow areas have to be continuously given attention for food insecurity, however, in general, the City has been doing good job in terms of this issue.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,
@@ -71,7 +71,7 @@ var config = {
             onChapterEnter: [
                  {
                      layer: 'eat',
-                     opacity: 1
+                     opacity: 0.8
                  },
                  {
                      layer: 'play',
@@ -108,19 +108,19 @@ var config = {
         },
         {
             id: 'upper_east_side',
-            title: 'Upper East Side?',
+            title: 'Situation in Upper East Side?',
             //image: './path/to/image/source.png',
-            description: 'No, one of the most richest neightborhood in NYC.' ,
+            description: 'Upper East Side seems not having any issues in terms of food insecurity. This neighborhood has been dominated by wealthy White Anglo-Saxon Protestant families. The neighborhood contains the greatest concentration of individual wealth in Manhattan. As of 2011, the median household income for the Upper East Side was $131,492.' ,
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
-              zoom: 12.7,
+              zoom: 12.85,
               pitch: 53.00,
               bearing: 28.00
             },
             onChapterEnter: [
                          {
                              layer: 'eat',
-                             opacity: 1
+                             opacity: 0.8
                          },
                          {
                              layer: 'play',
@@ -157,19 +157,19 @@ var config = {
         },
         {
             id: 'brownsville',
-            title: 'What about Brownsville?',
+            title: 'Situation in Brownsville?',
             //image: './path/to/image/source.png',
-            description: 'Can neighborhood with relatively high food insecurity even before COVID-19 bear with the situation that children cannot eat at school?',
+            description: 'Brownsville has slight issue with food insecurity. Brownsville had been the poorest neighborhood for several years. It is high concentration of empty lots and burned-out buildings. Brownsville contained a concentrated, multigenerational black residents that caused its development to remain static. ?',
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
-              zoom: 12.7,
+              zoom: 12.85,
               pitch: 53.00,
               bearing: 8.00
             },
             onChapterEnter: [
                          {
                              layer: 'eat',
-                             opacity: 1
+                             opacity: 0.8
                          },
                          {
                              layer: 'play',
@@ -208,7 +208,7 @@ var config = {
             id: 'openspace_access',
             title: 'The 2nd element: Access to Playground',
             //image: './path/to/image/source.png',
-            description: 'Covid-19 deprived access to school playgrounds from youth and well-maintained parks became alternatives. The place with stronger green requires more budget and care.',
+            description: 'Covid-19 deprived access to school playgrounds from youth and parks became alternatives. The place with less green indicates less budget, which means less maintained. In general, NYC needs to work on more for increasing the numbers of well-maintained parks.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,
@@ -222,7 +222,7 @@ var config = {
                  },
                  {
                      layer: 'play',
-                     opacity: 0.75
+                     opacity: 0.8
                  },
                 {
                      layer: 'learn',
@@ -260,7 +260,7 @@ var config = {
             description: 'Upper east side has well-maintained parks where youth can play.' ,
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
-              zoom: 12.7,
+              zoom: 12.85,
               pitch: 53.00,
               bearing: 28.00
             },
@@ -271,7 +271,7 @@ var config = {
                          },
                          {
                              layer: 'play',
-                             opacity: 0.75
+                             opacity: 0.8
                          },
                         {
                              layer: 'learn',
@@ -294,7 +294,7 @@ var config = {
                          },
                         {
                              layer: 'learn',
-                             opacity: 0.4
+                             opacity: 0
                          },
                         {
                              layer: 'svi',
@@ -309,7 +309,7 @@ var config = {
             description: 'Parks at Brownsville needs to be more maintained.' ,
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
-              zoom: 12.7,
+              zoom: 12.85,
               pitch: 53.00,
               bearing: 8.00
             },
@@ -320,7 +320,7 @@ var config = {
                          },
                          {
                              layer: 'play',
-                             opacity: 0.75
+                             opacity: 0.8
                          },
                         {
                              layer: 'learn',
@@ -355,7 +355,7 @@ var config = {
             id: 'internet_access',
             title: 'The 3rd element: Access to the Internet',
             //image: './path/to/image/source.png',
-            description: 'Internet became essential infrastructure for Online education during the pandemic. Was the City prepared enough for it?',
+            description: 'Internet became essential infrastructure for Online education during the pandemic. Less color places need more internet acecss. Overall NYC has been doing good job.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,
@@ -373,7 +373,7 @@ var config = {
                  },
                 {
                      layer: 'learn',
-                     opacity: 0.58
+                     opacity: 0.8
                  },
                 {
                      layer: 'svi',
@@ -405,10 +405,10 @@ var config = {
             id: 'upper_east_side3',
             title: 'Upper East Side',
             //image: './path/to/image/source.png',
-            description: 'No color means no problem. It seems that Upper East Side has no problem in internet access.' ,
+            description: 'Upper East Side has no problem in internet access.' ,
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
-              zoom: 12.7,
+              zoom: 12.85,
               pitch: 53.00,
               bearing: 28.00
             },
@@ -423,7 +423,7 @@ var config = {
                          },
                         {
                              layer: 'learn',
-                             opacity: 0.58
+                             opacity: 0.8
                          },
                         {
                              layer: 'svi',
@@ -454,10 +454,10 @@ var config = {
             id: 'brownsville3',
             title: 'Brownsville',
             //image: './path/to/image/source.png',
-            description: 'Internet at Brownsbille needs to be developed more.' ,
+            description: 'Internet at Brownsbille do not have much problems, either.' ,
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
-              zoom: 12.7,
+              zoom: 12.85,
               pitch: 53.00,
               bearing: 8.00
             },
@@ -472,7 +472,7 @@ var config = {
                          },
                         {
                              layer: 'learn',
-                             opacity: 0.58
+                             opacity: 0.85
                          },
                         {
                              layer: 'svi',
@@ -525,7 +525,7 @@ var config = {
                  },
                 {
                      layer: 'svi',
-                     opacity: 0.7
+                     opacity: 0.8
                  }
             ],
             onChapterExit: [

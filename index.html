@@ -477,8 +477,8 @@
 
     // set the dimensions and margins of the graph
     var margin = {top: 10, right: 20, bottom: 30, left: 50},
-        width = 660 - margin.left - margin.right,
-        height = 660 - margin.top - margin.bottom;
+        width = 600 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz")
@@ -559,7 +559,7 @@
 
       //Projection
       var albersProjection = d3.geoAlbers()
-                               .scale(70000)
+                               .scale(60000)
                                .rotate([73.9787, 0])
                                .center([0, 40.68])
                                .translate([width/2, height/2])
@@ -866,7 +866,7 @@
                    + "Native:" + d.properties.Perc_amindian_alnative+"%<br>"
                    + "Islander:" + d.properties.Perc_hawaii_pi+"%<br>"
                  )
-             .style("font-size","12px")
+             .style("font-size","11px")
              .style("background","#fafafa")
              .style("left", (d3.mouse(this)[0]+30) + "px")
              .style("top", (d3.mouse(this)[1]+30) + "px");

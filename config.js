@@ -61,7 +61,7 @@ var config = {
         {
           id: 'upper_east_side_preview',
           title: 'The Upper East Side',
-          image: 'image/UpperEastSide.png',
+          image: 'image/UpperEastSide.PNG',
           description: 'This neighborhood has been dominated by wealthy White Anglo-Saxon Protestant families. The neighborhood contains the greatest concentration of individual wealth in Manhattan. As of 2011, the median household income for the Upper East Side was $131,492.',
           location: {
             center: { lon: -73.956555, lat: 40.773565 },
@@ -110,7 +110,7 @@ var config = {
         {
           id: 'brownsville_preview',
           title: 'Brownsville',
-          image: 'image/Brownsville.png',
+          image: 'image/Brownsville.PNG',
           description: 'As a consequence of the same systematic racism mechanisms that has kept the Upper East Side wealthy, Brownsville - a predominantly black neighborhood - has been the poorest neighborhood in NYC for several years. We wonder: Is this pandemic making these communities even more vulnerable than before?',
           location: {
             center: { lon:  -73.9065, lat: 40.6564 },

@@ -13,10 +13,10 @@ var config = {
             id: 'preview',
             title: 'Elements of Youth Wellness; EAT, PLAY, and LEARN',
               //image: './path/to/image/source.png',
-            description: 'When the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playgrounds, and in-person classes. By analyzing census and NYC data, we are able to display where the city may need to focus in the future. In the next few maps, we will focus on the comparison of two very different neighborhoods: The Upper East Side and Brownsville.',
+            description: 'When the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playgrounds, and in-person classes. By analyzing census and NYC data, we are able to display where the city may need to focus in the future. In the next few maps, we will zoom in into two very different neighborhoods: The Upper East Side and Brownsville.',
             location: {
-              center: { lon: -74.09232, lat: 40.73593 },
-              zoom: 10.50,
+              center: { lon: -74.26807, lat: 40.77192 },
+              zoom: 9.88,
               pitch: 0.00,
               bearing: 0.00
             },
@@ -59,12 +59,111 @@ var config = {
             ]
         },
         {
+          id: 'upper_east_side_preview',
+          title: 'The Upper East Side',
+          image: 'image/UpperEastSide.png',
+          description: 'This neighborhood has been dominated by wealthy White Anglo-Saxon Protestant families. The neighborhood contains the greatest concentration of individual wealth in Manhattan. As of 2011, the median household income for the Upper East Side was $131,492.',
+          location: {
+            center: { lon: -73.956555, lat: 40.773565 },
+            zoom: 12.85,
+            pitch: 53.00,
+            bearing: 28.00
+            },
+            onChapterEnter: [
+                 {
+                     layer: 'eat',
+                     opacity: 0
+                 },
+                 {
+                     layer: 'play',
+                     opacity: 0
+                 },
+                {
+                     layer: 'learn',
+                     opacity: 0
+                 },
+                {
+                     layer: 'svi',
+                     opacity: 0
+                 }
+            ],
+            onChapterExit: [
+
+               {
+                     layer: 'eat',
+                     opacity: 0
+                 },
+                 {
+                     layer: 'play',
+                     opacity: 0
+                 },
+                {
+                     layer: 'learn',
+                     opacity: 0
+                 },
+                {
+                     layer: 'svi',
+                     opacity: 0
+                 }
+            ]
+        },
+        {
+          id: 'brownsville_preview',
+          title: 'Brownsville',
+          image: 'image/Brownsville.png',
+          description: 'As a consequence of the same systematic racism mechanisms that has kept the Upper East Side wealthy, Brownsville - a predominantly black neighborhood - has been the poorest neighborhood in NYC for several years. We wonder: Is this pandemic making these communities even more vulnerable than before?',
+          location: {
+            center: { lon:  -73.9065, lat: 40.6564 },
+            zoom: 12.85,
+            pitch: 53.00,
+            bearing: 8.00
+          },
+            onChapterEnter: [
+                 {
+                     layer: 'eat',
+                     opacity: 0
+                 },
+                 {
+                     layer: 'play',
+                     opacity: 0
+                 },
+                {
+                     layer: 'learn',
+                     opacity: 0
+                 },
+                {
+                     layer: 'svi',
+                     opacity: 0
+                 }
+            ],
+            onChapterExit: [
+
+               {
+                     layer: 'eat',
+                     opacity: 0
+                 },
+                 {
+                     layer: 'play',
+                     opacity: 0
+                 },
+                {
+                     layer: 'learn',
+                     opacity: 0
+                 },
+                {
+                     layer: 'svi',
+                     opacity: 0
+                 }
+            ]
+        },
+
+        {
             id: 'food_access',
-            title: 'How about Food Access?',
+            title: 'The 1st element: What about Food Access?',
             description: 'Less yellow means less access to food. Though the City has been doing good job to combat food insecurity, those less yellow areas have to be continuously given attention to avoid that vulnerable youth become more vulnerable.',
             location: {
-              center: { lon: -74.09232, lat: 40.73593 },
-              zoom: 9.70,
+              center: { lon: -74.24983, lat: 40.72085 },
+              zoom: 10.06,
               pitch: 0.00,
               bearing: 0.00
             },
@@ -110,7 +209,7 @@ var config = {
             id: 'upper_east_side',
             title: 'Situation in Upper East Side?',
             //image: './path/to/image/source.png',
-            description: 'Upper East Side seems not having any issues in terms of food insecurity. This neighborhood has been dominated by wealthy White Anglo-Saxon Protestant families. The neighborhood contains the greatest concentration of individual wealth in Manhattan. As of 2011, the median household income for the Upper East Side was $131,492.',
+            description: 'Upper East Side seems not having any issues in terms of food insecurity.',
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
               zoom: 12.85,
@@ -159,7 +258,7 @@ var config = {
             id: 'brownsville',
             title: 'Situation in Brownsville?',
             //image: './path/to/image/source.png',
-            description: 'Less yellow areas cover Brownsville; that means continuous attention is required. Brownsville had been the poorest neighborhood for several years. It is high concentration of empty lots and burned-out buildings. Brownsville contained a concentrated, multigenerational black residents that caused its development to remain static.',
+            description: 'Less yellow areas cover Brownsville; that means continuous attention is required.',
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
               zoom: 12.85,
@@ -210,8 +309,8 @@ var config = {
             //image: './path/to/image/source.png',
             description: 'Covid-19 deprived access to school playgrounds from youth and parks became alternatives. The place with less green indicates that residents have less access to parks. In general, NYC needs to work on more for this issue.',
             location: {
-              center: { lon: -74.09232, lat: 40.73593 },
-              zoom: 9.70,
+              center: { lon: -74.24983, lat: 40.72085 },
+              zoom: 10.06,
               pitch: 0.00,
               bearing: 0.00
             },
@@ -357,8 +456,8 @@ var config = {
             //image: './path/to/image/source.png',
             description: 'Internet became essential infrastructure for Online education during the pandemic. Less color places need more internet acecss. Overall NYC has been doing good job.',
             location: {
-              center: { lon: -74.09232, lat: 40.73593 },
-              zoom: 9.70,
+              center: { lon: -74.24983, lat: 40.72085 },
+              zoom: 10.06,
               pitch: 0.00,
               bearing: 0.00
             },
@@ -505,10 +604,10 @@ var config = {
             //image: './path/to/image/source.png',
             description: 'The map shows the place with high social vulnerability with stronger color.',
             location: {
-              center: { lon: -74.09232, lat: 40.73593 },
-              zoom: 9.70,
-              pitch: 0,
-              bearing: 0
+              center: { lon: -74.24983, lat: 40.72085 },
+              zoom: 10.06,
+              pitch: 0.00,
+              bearing: 0.00
             },
           onChapterEnter: [
                  {

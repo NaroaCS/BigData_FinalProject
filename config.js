@@ -13,7 +13,7 @@ var config = {
             id: 'preview',
             title: 'Elements of Youth Wellness; EAT, PLAY, and LEARN',
               //image: './path/to/image/source.png',
-            description: 'When the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playgrounds, and in-person classes. By analyzing census data, we are able to display where the city may need to focus in the future.',
+            description: 'When the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playgrounds, and in-person classes. By analyzing census and NYC data, we are able to display where the city may need to focus in the future.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 10.50,
@@ -61,7 +61,7 @@ var config = {
         {
             id: 'food_access',
             title: 'How about Food Access?',
-            description: 'Less yellow areas have to be continuously given attention for food insecurity, however, in general, the City has been doing good job in terms of this issue.',
+            description: 'Less yellow means less access to food. Though the City has been doing good job to combat food insecurity, those less yellow areas have to be continuously given attention to avoid that Vulnerable youth become more vulnerable.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,
@@ -110,7 +110,7 @@ var config = {
             id: 'upper_east_side',
             title: 'Situation in Upper East Side?',
             //image: './path/to/image/source.png',
-            description: 'Upper East Side seems not having any issues in terms of food insecurity. This neighborhood has been dominated by wealthy White Anglo-Saxon Protestant families. The neighborhood contains the greatest concentration of individual wealth in Manhattan. As of 2011, the median household income for the Upper East Side was $131,492.' ,
+            description: 'Upper East Side seems not having any issues in terms of food insecurity. This neighborhood has been dominated by wealthy White Anglo-Saxon Protestant families. The neighborhood contains the greatest concentration of individual wealth in Manhattan. As of 2011, the median household income for the Upper East Side was $131,492.',
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
               zoom: 12.85,
@@ -159,7 +159,7 @@ var config = {
             id: 'brownsville',
             title: 'Situation in Brownsville?',
             //image: './path/to/image/source.png',
-            description: 'Brownsville has slight issue with food insecurity. Brownsville had been the poorest neighborhood for several years. It is high concentration of empty lots and burned-out buildings. Brownsville contained a concentrated, multigenerational black residents that caused its development to remain static. ?',
+            description: 'Less yellow areas cover Brownsville; that means continuous attention is required. Brownsville had been the poorest neighborhood for several years. It is high concentration of empty lots and burned-out buildings. Brownsville contained a concentrated, multigenerational black residents that caused its development to remain static.',
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
               zoom: 12.85,
@@ -208,7 +208,7 @@ var config = {
             id: 'openspace_access',
             title: 'The 2nd element: Access to Playground',
             //image: './path/to/image/source.png',
-            description: 'Covid-19 deprived access to school playgrounds from youth and parks became alternatives. The place with less green indicates less budget, which means less maintained. In general, NYC needs to work on more for increasing the numbers of well-maintained parks.',
+            description: 'Covid-19 deprived access to school playgrounds from youth and parks became alternatives. The place with less green indicates that residents have less access to parks. In general, NYC needs to work on more for this issue.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,
@@ -257,7 +257,7 @@ var config = {
             id: 'upper_east_side2',
             title: 'Upper East Side',
             //image: './path/to/image/source.png',
-            description: 'Upper east side has well-maintained parks where youth can play.' ,
+            description: 'Even Upper east side areas do not have enough access to parks.',
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
               zoom: 12.85,
@@ -306,7 +306,7 @@ var config = {
             id: 'brownsville2',
             title: 'Brownsville',
             //image: './path/to/image/source.png',
-            description: 'Parks at Brownsville needs to be more maintained.' ,
+            description: 'NYC needs close attention to this area for park access. Vulnerable youth become more vulnerable without proper infrastructure. ' ,
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
               zoom: 12.85,
@@ -405,7 +405,7 @@ var config = {
             id: 'upper_east_side3',
             title: 'Upper East Side',
             //image: './path/to/image/source.png',
-            description: 'Upper East Side has no problem in internet access.' ,
+            description: 'Place like Upper East Side has no problem in internet access.' ,
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
               zoom: 12.85,
@@ -454,7 +454,7 @@ var config = {
             id: 'brownsville3',
             title: 'Brownsville',
             //image: './path/to/image/source.png',
-            description: 'Internet at Brownsbille do not have much problems, either.' ,
+            description: 'However, internet access at Brownsbille has to be improved more. Since the almost all the education shifted to online, NYC needs to continuously work for improving the situation.' ,
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
               zoom: 12.85,

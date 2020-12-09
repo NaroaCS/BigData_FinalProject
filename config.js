@@ -13,7 +13,7 @@ var config = {
             id: 'preview',
             title: 'Elements of Youth Wellness; EAT, PLAY, and LEARN',
               //image: './path/to/image/source.png',
-            description: 'When the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playgrounds, and in-person classes. By analyzing census and NYC data, we are able to display where the city may need to focus in the future.',
+            description: 'When the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playgrounds, and in-person classes. By analyzing census and NYC data, we are able to display where the city may need to focus in the future. In the next few maps, we will focus on the comparison of two very different neighborhoods: The Upper East Side and Brownsville.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 10.50,
@@ -61,7 +61,7 @@ var config = {
         {
             id: 'food_access',
             title: 'How about Food Access?',
-            description: 'Less yellow means less access to food. Though the City has been doing good job to combat food insecurity, those less yellow areas have to be continuously given attention to avoid that Vulnerable youth become more vulnerable.',
+            description: 'Less yellow means less access to food. Though the City has been doing good job to combat food insecurity, those less yellow areas have to be continuously given attention to avoid that vulnerable youth become more vulnerable.',
             location: {
               center: { lon: -74.09232, lat: 40.73593 },
               zoom: 9.70,

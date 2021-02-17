@@ -6,9 +6,17 @@ This website has been developed by Ayaka Yamashita, Hyun-Chae Chad Loh and Naroa
 
 For the scrollytelling we used the [Mapbox Scrolly Template.](https://github.com/mapbox/storytelling)
 
-We were interested in exploring how the Covid-19 pandemic might have further increased social inequalities by impacting those who were already vulnerable disproportionally. We are especially concerned that youth, more vulnerable than adult during the pandemic.
 
-This work explores three of the inequalities that we considered to have a significant impact in daily lives of the youth. We are aware that there are many relevant factors that we are not taking into consideration. In order to get a full picture to influence policy making, a more detailed study should be conducted with aditional resources and time.
+This project aims to explore how the Covid-19 pandemic might have further increased social inequalities by impacting those who were already vulnerable disproportionately . It focuses on youth, the most vulnerable sector in already vulnerable communities.
+
+Eat, learn, play are the three main activities in the life of a child , and these activities have been greatly impacted by the pandemic; The Covid- 19 crisis has increased food insecurity, education depends on the access to internet, and, with reduced mobility, the access to green spaces within the neighborhoods  more important than ever before.
+
+The Social Vulnerability Indexes (SVI) such as the CDC SVI are meant to reflect the vulnerability of different communities caused by stresses or emergency events such as a disease outbreak. The SVI from CDC considers 15 different variables from the US Census to calculate this index for each census tract. However, the access to internet, food and green spaces are not considered.
+
+We believe that, as a consequence, the vulnerability of some communities to this pandemic might have been underestimated and that the Covid-19 pandemic might have, indeed, further increased social inequalities by impacting those who were already vulnerable disproportionately. In addition,
+
+Our website that allows to explore food insecurity, access to internet and access to green spaces for each census tract in NYC. It allows to explore how these variables relate to the SVI and race demographics of the census tract.
+
 
 ## Data sources and methods: ##
 

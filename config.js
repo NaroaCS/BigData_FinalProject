@@ -13,7 +13,7 @@ var config = {
             id: 'preview',
             title: 'Elements of Youth Wellness; EAT, PLAY, and LEARN',
               //image: './path/to/image/source.png',
-            description: 'When the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playgrounds, and in-person classes. By analyzing census and NYC data, we are able to display where the city may need to focus in the future. In the next few maps, we will zoom in into two very different neighborhoods: The Upper East Side and Brownsville.',
+            description: 'When the stay-at-home order and school closures went into effect, youth in NYC were subjected to the triple burden of not being able to access school meals, school playgrounds, and in-person classes. By analyzing census and NYC data, we display where the city may need to focus more in the future. In the next few maps, we will zoom in into two very different neighborhoods: The Upper East Side and Brownsville.',
             location: {
               center: { lon: -74.26807, lat: 40.77192 },
               zoom: 9.88,
@@ -62,7 +62,7 @@ var config = {
           id: 'upper_east_side_preview',
           title: 'The Upper East Side',
           image: 'image/UpperEastSide.PNG',
-          description: 'This neighborhood has been dominated by wealthy White Anglo-Saxon Protestant families. The neighborhood contains the greatest concentration of individual wealth in Manhattan. As of 2011, the median household income for the Upper East Side was $131,492.',
+          description: 'This neighborhood is dominated by wealthy White Anglo-Saxon Protestant families. The area contains the greatest concentration of individual wealth in Manhattan. As of 2011, the median household income for the Upper East Side was $131,492.',
           location: {
             center: { lon: -73.956555, lat: 40.773565 },
             zoom: 12.85,
@@ -111,7 +111,7 @@ var config = {
           id: 'brownsville_preview',
           title: 'Brownsville',
           image: 'image/Brownsville.PNG',
-          description: 'As a consequence of the same systematic racism mechanisms that has kept the Upper East Side wealthy, Brownsville - a predominantly black neighborhood - has been the poorest neighborhood in NYC for several years. We wonder: Is this pandemic making these communities even more vulnerable than before?',
+          description: 'Consequently, the same systematic racism mechanisms that have kept the Upper East Side wealthy, Brownsville - a predominantly black neighborhood - has been the most impoverished neighborhood in NYC for several years. We wonder: Is this pandemic making these communities even more vulnerable than before?',
           location: {
             center: { lon:  -73.9065, lat: 40.6564 },
             zoom: 12.85,
@@ -159,8 +159,8 @@ var config = {
 
         {
             id: 'food_access',
-            title: 'The 1st element: What about Food Access?',
-            description: 'Less yellow means less access to food. Though the City has been doing good job to combat food insecurity, those less yellow areas have to be continuously given attention to avoid that vulnerable youth become more vulnerable.',
+            title: 'The 1st element: Food Access',
+            description: 'Lighter color means less food access. Though the city has been doing an excellent job to combat food insecurity, the light-colored areas need improvements to avoid vulnerable youth becoming even more vulnerable during the pandemic.',
             location: {
               center: { lon: -74.24983, lat: 40.72085 },
               zoom: 10.06,
@@ -207,9 +207,9 @@ var config = {
         },
         {
             id: 'upper_east_side',
-            title: 'Situation in Upper East Side?',
+            title: 'The situation in the Upper East Side',
             //image: './path/to/image/source.png',
-            description: 'Upper East Side seems not having any issues in terms of food insecurity.',
+            description: 'The Upper East Side does not have significant issues in terms of food insecurity.',
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
               zoom: 12.85,
@@ -256,9 +256,9 @@ var config = {
         },
         {
             id: 'brownsville',
-            title: 'Situation in Brownsville?',
+            title: 'The situation in Brownsville',
             //image: './path/to/image/source.png',
-            description: 'Less yellow areas cover Brownsville; that means continuous attention is required.',
+            description: 'The lighter color represents lower food access. Continuous attention is required in Brownsville regarding food security.',
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
               zoom: 12.85,
@@ -307,7 +307,7 @@ var config = {
             id: 'openspace_access',
             title: 'The 2nd element: Access to Playground',
             //image: './path/to/image/source.png',
-            description: 'Covid-19 deprived access to school playgrounds from youth and parks became alternatives. The place with less green indicates that residents have less access to parks. In general, NYC needs to work on more for this issue.',
+            description: 'Covid-19 deprived access to school playgrounds from youth, and parks became the alternative for recreational space. The green color indicates the park access index that accounts for the accessibility to parks and park budgets, meaning that the residents in greener neighborhoods have a better recreational infrastructure.',
             location: {
               center: { lon: -74.24983, lat: 40.72085 },
               zoom: 10.06,
@@ -356,7 +356,7 @@ var config = {
             id: 'upper_east_side2',
             title: 'Upper East Side',
             //image: './path/to/image/source.png',
-            description: 'Even Upper east side areas do not have enough access to parks.',
+            description: 'The residents in the Upper East Side have excellent access to Central Park.',
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
               zoom: 12.85,
@@ -405,7 +405,7 @@ var config = {
             id: 'brownsville2',
             title: 'Brownsville',
             //image: './path/to/image/source.png',
-            description: 'NYC needs close attention to this area for park access. Vulnerable youth become more vulnerable without proper infrastructure. ' ,
+            description: 'But NYC needs to pay close attention to this area to secure park access. Vulnerable youth become more vulnerable without proper infrastructure.' ,
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
               zoom: 12.85,
@@ -454,7 +454,7 @@ var config = {
             id: 'internet_access',
             title: 'The 3rd element: Access to the Internet',
             //image: './path/to/image/source.png',
-            description: 'Internet became essential infrastructure for Online education during the pandemic. Less color places need more internet acecss. Overall NYC has been doing good job.',
+            description: 'Internet became an essential infrastructure for online education during the pandemic. Less color places need more internet access.',
             location: {
               center: { lon: -74.24983, lat: 40.72085 },
               zoom: 10.06,
@@ -504,7 +504,7 @@ var config = {
             id: 'upper_east_side3',
             title: 'Upper East Side',
             //image: './path/to/image/source.png',
-            description: 'Place like Upper East Side has no problem in internet access.' ,
+            description: 'Affluent areas like the Upper East Side have no problem with internet access.' ,
             location: {
               center: { lon: -73.956555, lat: 40.773565 },
               zoom: 12.85,
@@ -553,7 +553,7 @@ var config = {
             id: 'brownsville3',
             title: 'Brownsville',
             //image: './path/to/image/source.png',
-            description: 'However, internet access at Brownsbille has to be improved more. Since the almost all the education shifted to online, NYC needs to continuously work for improving the situation.' ,
+            description: 'However, internet access has to be improved in areas such as Brownsville. Especially since almost all of the education has shifted to an online platform, NYC needs to pay more attention to extending its free wireless services and internet infrastructure in these susceptible areas.' ,
             location: {
               center: { lon:  -73.9065, lat: 40.6564 },
               zoom: 12.85,
@@ -600,9 +600,9 @@ var config = {
         },
         {
             id: 'svi',
-            title: 'How does Social Vulnerability relate to 3 elements of Youth Wellness?',
+            title: 'How does Social Vulnerability relate to the three elements of Youth Wellness?',
             //image: './path/to/image/source.png',
-            description: 'The map shows the place with high social vulnerability with stronger color.',
+            description: 'The map shows the place with high social vulnerability with a bolder color.',
             location: {
               center: { lon: -74.24983, lat: 40.72085 },
               zoom: 10.06,

@@ -532,8 +532,9 @@
       .domain([0, 5000])
       .range([ 4, 40]);
 
-    //Read the data
-    d3.json("https://github.com/NaroaCS/data/blob/main/data-viz/combined_data.geojson", function(data) {
+    //Read the data 
+
+    d3.json("https://raw.githubusercontent.com/NaroaCS/data/main/data-viz/combined_data.geojson", function(data) {
       console.log(data)
 
       // Add a scale for bubble color
@@ -568,7 +569,7 @@
                      .projection(albersProjection)
 
     // Loading data and map generation
-    d3.json("https://github.com/NaroaCS/data/blob/main/data-viz/home_results.json", function(data) {
+    d3.json("https://raw.githubusercontent.com/NaroaCS/data/main/data-viz/home_results.json", function(data) {
       svg3.selectAll("path")
          .data(data.features)
          .enter().append("path")

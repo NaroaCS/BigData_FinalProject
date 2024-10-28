@@ -208,7 +208,7 @@
           min-height: 5vh;
           padding-top: 5vh;
           padding-bottom: 5vh;
-          padding-right: : 5vh;
+          padding-right: 5vh;
           padding-left: 5vh;
           text-align: left;
           line-height: 25px;
@@ -220,7 +220,7 @@
           min-height: 5vh;
           padding-top: 5vh;
           padding-bottom: 5vh;
-          padding-right: : 5vh;
+          padding-right: 5vh;
           padding-left: 5vh;
           text-align: left;
           line-height: 25px;
@@ -533,7 +533,7 @@
       .range([ 4, 40]);
 
     //Read the data
-    d3.json("https://chadloh.github.io/data/combined_data.geojson", function(data) {
+    d3.json("https://github.com/NaroaCS/data/blob/main/data-viz/combined_data.geojson", function(data) {
       console.log(data)
 
       // Add a scale for bubble color
@@ -568,7 +568,7 @@
                      .projection(albersProjection)
 
     // Loading data and map generation
-    d3.json("https://chadloh.github.io/data/home_results.json", function(data) {
+    d3.json("https://github.com/NaroaCS/data/blob/main/data-viz/home_results.json", function(data) {
       svg3.selectAll("path")
          .data(data.features)
          .enter().append("path")
